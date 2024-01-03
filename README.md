@@ -1,0 +1,1 @@
+Hi there! Feel free to use any of the widgets I made/customized! The widgets I customized are marked with "*", all the others I made myself. Feel free to customize any of the widgets to your own liking. Cheers!
