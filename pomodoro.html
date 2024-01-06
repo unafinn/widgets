@@ -11,25 +11,19 @@
 
       body {
         background-color: var(--background);
-      }
-
-      body {
         font-family: monospace;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
+        margin: 0 auto;
       }
 
       .timer-container {
         text-align: center;
-      }
-
-      .timer {
-        position: relative;
-        width: 150px;
-        height: 150px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 300px;
       }
 
       .countdown-svg {
@@ -43,10 +37,10 @@
         background-color: transparent;
         border: none;
         color: var(--other);
-        padding: 10px 10px;
+        padding: clamp(0px, 7vw, 10px) clamp(0px, 7vw, 20px);
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: clamp(0px, 7vw, 20px);
         margin: 10px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
@@ -56,7 +50,7 @@
       #focus:hover,
       #break:hover {
         color: var(--main);
-        text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+        text-shadow: 0px 0px 6px var(--main);
         transform: scale(1.05);
       }
 
@@ -65,15 +59,15 @@
         background-color: var(--main);
         border: none;
         color: var(--background);
-        padding: 10px 20px;
+        padding: clamp(0px, 7vw, 10px) clamp(0px, 7vw, 20px);
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: clamp(0px, 7vw, 20px);
         margin: 10px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: clamp(0px, 4vw, 8px);
       }
 
       #startButton:hover {
@@ -107,10 +101,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 24px;
+        font-size: clamp(0px, 16vw, 49px);
         font-weight: bold;
-        color: var(--main)
+        color: var(--main);
       }
+      
     </style>
   </head>
 
@@ -119,14 +114,11 @@
       <div class="topBar">
         <button id="focus">focus</button>
         <button id="break">break</button>
-      </div>
-      <div class="timer" id="timer">
-        <svg class="countdown-svg" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45"></circle>
-        </svg>
-        <div class="countdown-text">25:00</div>
+        <svg class="countdown-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45"></circle></svg>
+        <div class="countdown-text"></div>
         <button id="startButton">start</button>
       </div>
+    </div>
       <script>
         const timerElement = document.querySelector('.countdown-text');
         const startButton = document.getElementById('startButton');
@@ -138,7 +130,6 @@
         var remember = startTime;
         var timeleft = startTime;
         let intervalId;
-        
         focusButton.style.color = 'rgba(255, 255, 255, 0.81)';
 
         function formatTime(time) {
@@ -189,15 +180,14 @@
             pauseTimer();
           }
         }
-        
         startButton.addEventListener('click', onClickFunction);
         breakButton.addEventListener("click", function() {
           breakButton.style.color = 'rgba(255, 255, 255, 0.81)';
           focusButton.style.color = 'rgba(255, 255, 255, 0.5)';
-          startTime = 60*5;
+          startTime = 60 * 5;
           resetTimer();
         });
-        focusButton.addEventListener("click", function () {
+        focusButton.addEventListener("click", function() {
           focusButton.style.color = 'rgba(255, 255, 255, 0.81)';
           breakButton.style.color = 'rgba(255, 255, 255, 0.5)';
           startTime = remember;
